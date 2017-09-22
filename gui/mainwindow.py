@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QMainWindow
+import os, sys
+from PyQt5.QtWidgets import QMainWindow, QFileDialog
 from gui.ui_mainwindow import Ui_MainWindow
 
 class MainWindow(QMainWindow):
@@ -15,3 +16,25 @@ class MainWindow(QMainWindow):
     
     def _setup_ui(self):
         pass
+    
+    def onOpenFile(self):
+        '''
+        print(__file__) # /Users/kakalin/csv/gui/mainwindow.py
+        print (os.path.dirname(__file__)) # /Users/kakalin/csv/gui
+        print (os.path.abspath(__file__)) # /Users/kakalin/csv/gui/mainwindow.py
+        print (os.path.abspath(os.path.dirname(__file__))) # /Users/kakalin/csv/gui
+        print (os.path.dirname(os.path.abspath(__file__))) # /Users/kakalin/csv/gui
+        '''
+
+        dir = os.path.dirname(__file__)
+
+        file_name = QFileDialog.getOpenFileName(self, 'Open file', dir)
+        print(file_name)
+
+        if fname[0]:
+            f = open(fname[0], 'r')
+
+            with f:
+                data = f.read()
+                self.textEdit.setText(data)
+        
