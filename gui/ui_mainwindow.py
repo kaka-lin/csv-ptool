@@ -36,7 +36,7 @@ class Ui_MainWindow(object):
         self.actionOpen.setObjectName("actionOpen")
         self.menuAbout.addAction(self.actionAbout)
         self.menuFile.addAction(self.actionOpen)
-        self.menubar.addAction(self.menuCSVtool.menuAction())
+        self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -51,4 +51,4 @@ class Ui_MainWindow(object):
         self.menuAbout.setTitle(_translate("MainWindow", "&Help"))
         self.menuFile.setTitle(_translate("MainWindow", "&File"))
         self.actionAbout.setText(_translate("MainWindow", "About..."))
-        self.actionOPen.setText(_translate("MainWindow", "Open File"))
+        self.actionOpen.setText(_translate("MainWindow", "Open File"))
