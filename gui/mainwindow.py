@@ -31,10 +31,13 @@ class MainWindow(QMainWindow):
         file_name = QFileDialog.getOpenFileName(self, 'Open file', dir)
         print(file_name)
 
-        if fname[0]:
-            f = open(fname[0], 'r')
+        if file_name[0]:
+            f = open(file_name[0], 'r')
 
             with f:
-                data = f.read()
-                self.textEdit.setText(data)
+                try:
+                    data = f.read()
+                    self.textEdit.setText(data)
+                except:
+                    print("read error!")
         
