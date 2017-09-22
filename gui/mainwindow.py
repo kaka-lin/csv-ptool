@@ -1,6 +1,10 @@
 import os, sys
 from PyQt5.QtWidgets import QMainWindow, QFileDialog
 from gui.ui_mainwindow import Ui_MainWindow
+from app.csv_handle import CSVHandle
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+import matplotlib.pyplot as plt
 
 class MainWindow(QMainWindow):
     def __init__ (self, app, translator, parent=None):
@@ -15,7 +19,10 @@ class MainWindow(QMainWindow):
         self._setup_ui()
     
     def _setup_ui(self):
-        pass
+        self.figure = Figure()
+        self.canvas = FigureCanvasQTAgg(self.figure)
+        self.ui.verticalLayout.addWidget(self.canvas)
+        
     
     def onOpenFile(self):
         '''
@@ -32,12 +39,12 @@ class MainWindow(QMainWindow):
         print(file_name)
 
         if file_name[0]:
-            f = open(file_name[0], 'r')
+            csv_handle = CSVHandle()
+            data = csv_handle.read(file_name[0])
+        
+        ax = self.figure.add_subplot(111)
+        ax.clear()
+        ax.plot(data)
 
-            with f:
-                try:
-                    data = f.read()
-                    self.textEdit.setText(data)
-                except:
-                    print("read error!")
+        self.canvas.draw()
         
