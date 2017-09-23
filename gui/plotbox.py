@@ -31,12 +31,35 @@ class PlotBox(QtWidgets.QGroupBox):
             self.data = csv_handle.read(file)
             self.isHaveData = True
         
+        self.showItem()
+    
+    def showItem(self):
+        self.gridLayout_2 = QtWidgets.QGridLayout()
+        self.gridLayout_2.setHorizontalSpacing(12)
+        self.gridLayout_2.setVerticalSpacing(12)
+        #self.check = []
+        row = 0
+        for i in range(len(self.data[0])):
+            c = QtWidgets.QCheckBox()
+            c.setText(self.data[0][i])
+            if i % 5 != 0:
+                col = i % 5
+                self.gridLayout_2.addWidget(c, row, col, 1, 1)
+            else:
+                row = row + 1
+                col = i % 5
+                self.gridLayout_2.addWidget(c, row, col, 1, 1)
+            #self.check.append(c)
+
+        self.ui.gridLayout.addLayout(self.gridLayout_2, 1, 0, 1, 1)
+        
     def plotData(self):
         
         if self.isHaveData:
             ax = self.ui.figure.add_subplot(111)
             ax.clear()
             ax.plot(self.data[1: ,1])
+            ax.plot(self.data[1: ,2])
             ax.set_ylabel(self.data[0][1])
             self.ui.canvas.draw()
         else:
