@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuAbout.menuAction())
 
-        self.actionOpen.triggered.connect(MainWindow.onOpenFile)
+        self.actionOpen.triggered.connect(MainWindow.openFile)
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
