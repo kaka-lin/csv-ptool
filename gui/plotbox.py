@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QFileDialog
 from gui.ui_plotbox import Ui_PlotBox
 from app.csv_handle import CSVHandle
 import matplotlib.pyplot as plt
+import numpy as np
 
 class PlotBox(QtWidgets.QGroupBox):
     """ Serial number edit box """
@@ -20,17 +21,18 @@ class PlotBox(QtWidgets.QGroupBox):
 
     def plotData(self):
         file_name = QFileDialog.getOpenFileName(self, 'Open file')
-        print(file_name)
 
         if file_name[0]:
             csv_handle = CSVHandle()
             data = csv_handle.read(file_name[0])
-        
-        
 
+        print(data[:, 1])
+        
         ax = self.ui.figure.add_subplot(111)
         ax.clear()
-        ax.plot(data)
-        #ax.set_ylim(0, 50)
+        ax.plot(data[1: ,1])
+        ax.set_ylabel(data[0][1])
+        #ax.set_ylim(20, 40)
+        
 
         self.ui.canvas.draw()
