@@ -32,20 +32,22 @@ class PlotBox(QtWidgets.QGroupBox):
             self.data, self.data_title = csv_handle.read(file)
             self.isHaveData = True
             self.showItem()
+        else:
+            self.data = []
+            self.data_title = []
+            self.isHaveData = False
+            self.showItem()
     
     def showItem(self):
-        self.list = QtWidgets.QListView()
-        self.model = QtGui.QStandardItemModel(self.list)
+        if self.isHaveData:
+            for title in self.data_title[0]:
+                item = QtGui.QStandardItem(title)
+                item.setCheckable(True)
+                self.ui.model.appendRow(item)
 
-        for title in self.data_title[0]:
-            item = QtGui.QStandardItem(title)
-            item.setCheckable(True)
-            self.model.appendRow(item)
-
-        self.list.setModel(self.model)
-        self.model.itemChanged.connect(self.onItemChanged)
+        else:
+            self.ui.model.clear()
         
-        self.ui.gridLayout.addWidget(self.list, 1, 0, 1, 1)
         self.index = []
     
     def onItemChanged(self, item):
@@ -65,7 +67,7 @@ class PlotBox(QtWidgets.QGroupBox):
                 ax.clear()
                 for i in range(len(self.index)):
                     ax.plot(self.data[1: ,self.index[i]], label = self.data_title[0][self.index[i]])
-                    ax.legend(loc='best')
+                    ax.legend(loc=2)
                 self.ui.canvas.draw()
             else:
                 ax.clear()

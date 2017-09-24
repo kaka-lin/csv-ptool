@@ -21,16 +21,22 @@ class Ui_PlotBox(object):
         # 將matplotlib嵌進來
         self.figure = Figure()
         self.canvas = FigureCanvasQTAgg(self.figure)
-
+        # listView
+        self.list = QtWidgets.QListView()
+        self.model = QtGui.QStandardItemModel(self.list)
+        self.list.setModel(self.model)
+        
         self.gridLayout.addWidget(self.fileName_lineEdit, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.open_button, 0, 1, 1, 1)
         self.gridLayout.addWidget(self.plot_button, 1, 1, 1, 1)
+        self.gridLayout.addWidget(self.list, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.canvas, 2, 0, 1, 2)
         
         self.retranslateUi(plotBox)
 
         self.open_button.clicked.connect(plotBox.openFile)
         self.plot_button.clicked.connect(plotBox.plotData)
+        self.model.itemChanged.connect(plotBox.onItemChanged)
 
     def retranslateUi(self, plotBox):
         _translate = QtCore.QCoreApplication.translate
