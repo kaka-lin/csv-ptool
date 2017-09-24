@@ -61,12 +61,15 @@ class PlotBox(QtWidgets.QGroupBox):
         
     def plotData(self):
         if self.isHaveData:
+            ax = self.ui.figure.add_subplot(111)
             if self.index:
-                ax = self.ui.figure.add_subplot(111)
                 ax.clear()
                 for i in range(len(self.index)):
-                    ax.plot(self.data[1: ,self.index[i]])
-            #ax.set_ylabel(self.data[0][1])
+                    ax.plot(self.data[1: ,self.index[i]], label = self.data_title[0][self.index[i]])
+                    ax.legend(loc='best')
+                self.ui.canvas.draw()
+            else:
+                ax.clear()
                 self.ui.canvas.draw()
         else:
             print('NO Data!')
