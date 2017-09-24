@@ -25,8 +25,8 @@ class Ui_PlotBox(object):
         self.gridLayout.addWidget(self.fileName_lineEdit, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.open_button, 0, 1, 1, 1)
         self.gridLayout.addWidget(self.plot_button, 1, 1, 1, 1)
-        self.gridLayout.addWidget(self.canvas, 2, 0, 1, 2) 
-
+        self.gridLayout.addWidget(self.canvas, 2, 0, 1, 2)
+        
         self.retranslateUi(plotBox)
 
         self.open_button.clicked.connect(plotBox.openFile)
