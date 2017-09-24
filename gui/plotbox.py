@@ -31,8 +31,7 @@ class PlotBox(QtWidgets.QGroupBox):
             csv_handle = CSVHandle()
             self.data, self.data_title = csv_handle.read(file)
             self.isHaveData = True
-        
-        self.showItem()
+            self.showItem()
     
     def showItem(self):
         self.list = QtWidgets.QListView()
