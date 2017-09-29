@@ -3,14 +3,14 @@
 *~
 
 venv/
-.venv/*.pyc
-*.pyo
-*~
-
-venv/
 .venv/
 
 *.csv
 
 .DS_Store
 ._.DS_Store
+
+# pyinstaller
+build/
+dist/
+*.spec
