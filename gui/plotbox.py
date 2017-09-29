@@ -81,6 +81,8 @@ class PlotBox(QtWidgets.QGroupBox):
                     ax.plot(self.data[1: ,self.index[i]], label = self.data_title[0][self.index[i]])
                     ax.legend(loc='best')
                     ax.grid(linestyle='dashed', alpha=0.5)
+                
+                self.ui.figure.tight_layout()
                 self.ui.canvas.draw()
             else:
                 ax.clear()
