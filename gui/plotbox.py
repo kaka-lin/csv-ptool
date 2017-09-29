@@ -31,7 +31,12 @@ class PlotBox(QtWidgets.QGroupBox):
             csv_handle = CSVHandle()
             self.data, self.data_title = csv_handle.read(file)
             self.isHaveData = True
-            self.showItem()
+            try:
+                self.showItem()
+            except Exception as  err:
+                print('Error:', err)
+            except:
+                print('No Data!')
         else:
             self.data = []
             self.data_title = []
@@ -43,10 +48,13 @@ class PlotBox(QtWidgets.QGroupBox):
     def showItem(self):
         self.ui.model.clear()
         if self.isHaveData:
-            for title in self.data_title[0]:
-                item = QtGui.QStandardItem(title)
-                item.setCheckable(True)
-                self.ui.model.appendRow(item)
+            if self.data_title:
+                for title in self.data_title[0]:
+                    item = QtGui.QStandardItem(title)
+                    item.setCheckable(True)
+                    self.ui.model.appendRow(item)
+            else:
+                print('No Data!')
 
         else:
             self.ui.model.clear()

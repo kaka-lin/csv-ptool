@@ -23,6 +23,5 @@ class CSVHandle():
                     
         data = np.array(data)
         data_title = list(data_title)
-            
-        return data, data_title
 
+        return data, data_title

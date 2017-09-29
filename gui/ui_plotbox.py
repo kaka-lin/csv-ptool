@@ -25,6 +25,7 @@ class Ui_PlotBox(object):
         self.list = QtWidgets.QListView()
         self.model = QtGui.QStandardItemModel(self.list)
         self.list.setModel(self.model)
+        self.list.setFixedHeight(100)
         
         self.gridLayout.addWidget(self.fileName_lineEdit, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.open_button, 0, 1, 1, 1)
