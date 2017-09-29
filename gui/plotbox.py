@@ -36,9 +36,12 @@ class PlotBox(QtWidgets.QGroupBox):
             self.data = []
             self.data_title = []
             self.isHaveData = False
-            self.showItem()
+            #self.showItem()
+            self.ui.model.clear()
+            
     
     def showItem(self):
+        self.ui.model.clear()
         if self.isHaveData:
             for title in self.data_title[0]:
                 item = QtGui.QStandardItem(title)
@@ -61,16 +64,19 @@ class PlotBox(QtWidgets.QGroupBox):
                     self.index.remove(i)
         
     def plotData(self):
+        ax = self.ui.figure.add_subplot(111)
         if self.isHaveData:
-            ax = self.ui.figure.add_subplot(111)
+            #ax = self.ui.figure.add_subplot(111)
             if self.index:
                 ax.clear()
                 for i in range(len(self.index)):
                     ax.plot(self.data[1: ,self.index[i]], label = self.data_title[0][self.index[i]])
-                    ax.legend(loc=2)
+                    ax.legend(loc='best')
                 self.ui.canvas.draw()
             else:
                 ax.clear()
                 self.ui.canvas.draw()
         else:
+            ax.clear()
+            self.ui.canvas.draw()
             print('NO Data!')
