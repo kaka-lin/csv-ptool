@@ -80,10 +80,7 @@ class PlotBox(QtWidgets.QGroupBox):
                 for i in range(len(self.index)):
                     ax.plot(self.data[1: ,self.index[i]], label = self.data_title[0][self.index[i]])
                     ax.legend(loc='best')
-                print(ax.can_pan())
-                print(ax.can_zoom())
-                print(ax.get_navigate())
-                print(ax.get_navigate_mode())
+                    ax.grid(linestyle='dashed', alpha=0.5)
                 self.ui.canvas.draw()
             else:
                 ax.clear()
