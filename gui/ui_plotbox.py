@@ -1,7 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QSizePolicy
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+#from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT
+from matplotlib.backends.backend_qt5 import NavigationToolbar2QT as NavigationToolbr
 
 class Ui_PlotBox(object):
     def setupUi(self, plotBox):
@@ -19,8 +21,14 @@ class Ui_PlotBox(object):
         self.fileName_lineEdit.setReadOnly(True)
         self.fileName_lineEdit.setObjectName("fileName_lineEdit")
         # 將matplotlib嵌進來
-        self.figure = Figure()
-        self.canvas = FigureCanvasQTAgg(self.figure)
+        self.widget = QtWidgets.QWidget()
+        self.figure = Figure(figsize=(5, 4), dpi=100)
+        self.canvas = FigureCanvas(self.figure)
+        self.canvas.setParent(self.widget)
+        self.canvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.canvas.updateGeometry()
+        self.toolbar = NavigationToolbr(self.canvas, self.widget)
+        
         # listView
         self.list = QtWidgets.QListView()
         self.model = QtGui.QStandardItemModel(self.list)
@@ -32,6 +40,7 @@ class Ui_PlotBox(object):
         self.gridLayout.addWidget(self.plot_button, 1, 1, 1, 1)
         self.gridLayout.addWidget(self.list, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.canvas, 2, 0, 1, 2)
+        self.gridLayout.addWidget(self.toolbar, 3, 0, 1, 1)
         
         self.retranslateUi(plotBox)
 
