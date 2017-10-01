@@ -29,13 +29,12 @@
 
 使用各種方法安裝python3.5以上版本
 
-使用 pip 安裝python所需模組
+使用 pip3 安裝python所需模組
 
-    $ pip install -r requirements.txt
-
+    $ pip3 install -r requirements.txt
 
 ## 執行
 
-環境都建置好之後便可執行檔案(當你電腦同時有python2.x與python3.x時注意使用的python版本)
+環境都建置好之後便可執行檔案
 
-    $ python csvtool.py
+    $ python3 csvtool.py
