@@ -34,13 +34,19 @@ class Ui_PlotBox(object):
         self.model = QtGui.QStandardItemModel(self.list)
         self.list.setModel(self.model)
         self.list.setFixedHeight(100)
+
+        # StatusBar
+        self.statusbar = QtWidgets.QStatusBar(plotBox)
+        self.statusbar.setObjectName("statusbar")
+        #plotBox.setStatusBar(self.statusbar)
         
         self.gridLayout.addWidget(self.fileName_lineEdit, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.open_button, 0, 1, 1, 1)
         self.gridLayout.addWidget(self.plot_button, 1, 1, 1, 1)
         self.gridLayout.addWidget(self.list, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.canvas, 2, 0, 1, 2)
-        self.gridLayout.addWidget(self.toolbar, 3, 0, 1, 1)
+        self.gridLayout.addWidget(self.toolbar, 3, 0, 1, 2)
+        self.gridLayout.addWidget(self.statusbar, 4, 0, 1, 2)
         
         self.retranslateUi(plotBox)
 

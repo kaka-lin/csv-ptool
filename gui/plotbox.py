@@ -44,9 +44,10 @@ class PlotBox(QtWidgets.QGroupBox):
             try:
                 self.showItem()
             except Exception as  err:
-                print('Error:', err)
+                self.ui.statusbar.showMessage('Error: ' + str(err))
             except:
-                print('No data or data format wrong!')
+                #print('No data or data format wrong!')
+                self.ui.statusbar.showMessage('No data or data format wrong!')
         else:
             self.data = []
             self.data_title = []
@@ -63,7 +64,8 @@ class PlotBox(QtWidgets.QGroupBox):
                     item.setCheckable(True)
                     self.ui.model.appendRow(item)
             else:
-                print('No data or data format wrong!')
+                #print('No data or data format wrong!')
+                self.ui.statusbar.showMessage('No data or data format wrong!')
 
         else:
             self.ui.model.clear()
@@ -91,7 +93,8 @@ class PlotBox(QtWidgets.QGroupBox):
                         ax.legend(loc='best')
                         ax.grid(linestyle='dashed', alpha=0.5)
                     except Exception as err:
-                        print('Error', err)
+                        #print('Error:', err)
+                        self.ui.statusbar.showMessage('Error: ' + str(err))
                 
                 self.ui.figure.tight_layout()
                 self.ui.canvas.draw()
@@ -101,4 +104,5 @@ class PlotBox(QtWidgets.QGroupBox):
         else:
             ax.clear()
             self.ui.canvas.draw()
-            print('NO Data!')
+            #print('NO Data!')
+            self.ui.statusbar.showMessage('No Data!')
