@@ -29,7 +29,7 @@ class PlotBox(QtWidgets.QGroupBox):
 
         if file:
             csv_handle = CSVHandle()
-            self.data, self.data_title = csv_handle.read(file)
+            self.data, self.data_title = csv_handle.readHioki(file)
             self.isHaveData = True
             try:
                 self.showItem()
