@@ -2,6 +2,7 @@ import os, sys
 from PyQt5.QtWidgets import QMainWindow, QFileDialog
 from gui.ui_mainwindow import Ui_MainWindow
 from gui.hiokitab import HiokiTab
+from gui.agilenttab import AgilentTab
 from gui.normaltab import NormalTab
 
 class MainWindow(QMainWindow):
@@ -18,7 +19,8 @@ class MainWindow(QMainWindow):
     
     def _setup_ui(self):
         self._hioki_tab = HiokiTab(self.ui.tab)
-        self._normal_tab = NormalTab(self.ui.tab_2)
+        self._agilent_tab = AgilentTab(self.ui.tab_2)
+        self._normal_tab = NormalTab(self.ui.tab_3)
         
     
     def openFile(self):

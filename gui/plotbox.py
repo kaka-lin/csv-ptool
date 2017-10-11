@@ -36,6 +36,8 @@ class PlotBox(QtWidgets.QGroupBox):
             csv_handle = CSVHandle()
             if self._class == 'H':
                 self.data, self.data_title = csv_handle.readHioki(file)
+            elif self._class == 'A':
+                self.data, self.data_title = csv_handle.readAgilent(file)
             else:
                 self.data, self.data_title = csv_handle.read(file)
 

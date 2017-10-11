@@ -43,4 +43,25 @@ class CSVHandle():
         data_title = list(data_title)
 
         return data, data_title
-    
+
+    def readAgilent(self, file):
+        data = []
+        data_title = []
+
+        with open(file, 'r', encoding='utf-16') as csv_file:
+            rows = csv.reader(csv_file)
+            i = 0
+            for row in rows:
+                i += 1
+
+                if i >= 23:
+                    data.append(row)
+                elif i == 22:
+                    data_title.append(row)
+                
+        
+        data = np.array(data)
+        data_title = list(data_title)
+
+        return data, data_title
+        
