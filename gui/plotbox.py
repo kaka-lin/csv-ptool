@@ -35,11 +35,23 @@ class PlotBox(QtWidgets.QGroupBox):
         if file:
             csv_handle = CSVHandle()
             if self._class == 'H':
-                self.data, self.data_title = csv_handle.readHioki(file)
+                try:
+                    self.data, self.data_title = csv_handle.readHioki(file)
+                except:
+                    self.ui.statusbar.showMessage('Error: data format wrong!')
+                finally:
+                    pass
+                
             elif self._class == 'A':
-                self.data, self.data_title = csv_handle.readAgilent(file)
+                try:
+                    self.data, self.data_title = csv_handle.readAgilent(file)
+                except Exception as err:
+                    self.ui.statusbar.showMessage('Error: ' + str(err))
             else:
-                self.data, self.data_title = csv_handle.read(file)
+                try:
+                    self.data, self.data_title = csv_handle.read(file)
+                except:
+                    self.ui.statusbar.showMessage('Error: data format wrong!')
 
             self.isHaveData = True
 
