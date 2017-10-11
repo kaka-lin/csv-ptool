@@ -86,9 +86,12 @@ class PlotBox(QtWidgets.QGroupBox):
             if self.index:
                 ax.clear()
                 for i in range(len(self.index)):
-                    ax.plot(self.data[0: , self.index[i]], label = self.data_title[0][self.index[i]])
-                    ax.legend(loc='best')
-                    ax.grid(linestyle='dashed', alpha=0.5)
+                    try:
+                        ax.plot(self.data[0: , self.index[i]], label = self.data_title[0][self.index[i]])
+                        ax.legend(loc='best')
+                        ax.grid(linestyle='dashed', alpha=0.5)
+                    except Exception as err:
+                        print('Error', err)
                 
                 self.ui.figure.tight_layout()
                 self.ui.canvas.draw()
