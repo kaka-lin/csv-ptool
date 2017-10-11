@@ -49,7 +49,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "CSV Handle Tool"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Hioki"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Test"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Normal"))
         self.menuAbout.setTitle(_translate("MainWindow", "&Help"))
         self.menuFile.setTitle(_translate("MainWindow", "&File"))
         self.actionAbout.setText(_translate("MainWindow", "About..."))

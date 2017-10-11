@@ -8,15 +8,21 @@ class CSVHandle():
     
     def read(self, file):
         data = []
+        data_title = []
 
         with open(file, 'r') as csv_file:
             rows = csv.reader(csv_file)
             for row in rows:
+                coulmn = len(row)
                 data.append(row)
-                    
-        data = np.array(data)
 
-        return data
+        for title in range(coulmn):
+            data_title.append(str(title)) 
+          
+        data = np.array(data)
+        data_title = [data_title]
+
+        return data, data_title
     
     def readHioki(self, file):
         data = []
@@ -32,8 +38,9 @@ class CSVHandle():
                     data.append(row)
                 elif i == 11:
                     data_title.append(row)
-                    
+        
         data = np.array(data)
         data_title = list(data_title)
 
         return data, data_title
+    

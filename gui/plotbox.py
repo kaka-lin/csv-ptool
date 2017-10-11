@@ -8,8 +8,10 @@ import numpy as np
 
 class PlotBox(QtWidgets.QGroupBox):
     """ Serial number edit box """
-    def __init__(self, parent=None):
+    def __init__(self, _class, parent=None):
         super(PlotBox, self).__init__(parent)
+
+        self._class = _class
 
         self.data = []
         self.data_title = []
@@ -27,21 +29,28 @@ class PlotBox(QtWidgets.QGroupBox):
 
         self.ui.fileName_lineEdit.setText(file)
 
+        self.readData(file)
+    
+    def readData(self, file=None):
         if file:
             csv_handle = CSVHandle()
-            self.data, self.data_title = csv_handle.readHioki(file)
+            if self._class == 'H':
+                self.data, self.data_title = csv_handle.readHioki(file)
+            else:
+                self.data, self.data_title = csv_handle.read(file)
+
             self.isHaveData = True
+
             try:
                 self.showItem()
             except Exception as  err:
                 print('Error:', err)
             except:
-                print('No Data!')
+                print('No data or data format wrong!')
         else:
             self.data = []
             self.data_title = []
             self.isHaveData = False
-            #self.showItem()
             self.ui.model.clear()
             
     
@@ -54,7 +63,7 @@ class PlotBox(QtWidgets.QGroupBox):
                     item.setCheckable(True)
                     self.ui.model.appendRow(item)
             else:
-                print('No Data!')
+                print('No data or data format wrong!')
 
         else:
             self.ui.model.clear()
@@ -74,11 +83,10 @@ class PlotBox(QtWidgets.QGroupBox):
     def plotData(self):
         ax = self.ui.figure.add_subplot(111)
         if self.isHaveData:
-            #ax = self.ui.figure.add_subplot(111)
             if self.index:
                 ax.clear()
                 for i in range(len(self.index)):
-                    ax.plot(self.data[1: ,self.index[i]], label = self.data_title[0][self.index[i]])
+                    ax.plot(self.data[0: , self.index[i]], label = self.data_title[0][self.index[i]])
                     ax.legend(loc='best')
                     ax.grid(linestyle='dashed', alpha=0.5)
                 

@@ -1,11 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from gui.plotbox import PlotBox
 
-class HiokiTab(QtWidgets.QVBoxLayout):
+class NormalTab(QtWidgets.QVBoxLayout):
     def __init__(self, parent=None):
-        super(HiokiTab, self).__init__(parent)
+        super(NormalTab, self).__init__(parent)
 
-        self.plot_box = PlotBox('H')
+        self.plot_box = PlotBox('N')
 
         self.addWidget(self.plot_box)
       
