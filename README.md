@@ -38,3 +38,8 @@
 環境都建置好之後便可執行檔案
 
     $ python3 csvtool.py
+
+
+## 範例
+
+<img src="images/image.png">
